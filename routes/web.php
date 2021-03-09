@@ -32,3 +32,4 @@ Route::get('calcular_z','App\Http\Controllers\FreteController@calcular_z');
 
 Route::get('bling-get','App\Http\Controllers\BlingController@index');
 Route::get('bling-post','App\Http\Controllers\BlingController@store');
+Route::get('capturar_loja','App\Http\Controllers\BlingController@capturar_loja');
