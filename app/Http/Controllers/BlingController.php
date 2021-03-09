@@ -49,6 +49,8 @@ class BlingController extends Controller
 
         $url = 'https://bling.com.br/Api/v2/produto/xml/';
 
+        $contador = 0;
+
         for ($i=0; $i < count($produtos); $i++) { 
 
             $codigo = $produtos[$i]['id'];
@@ -56,7 +58,11 @@ class BlingController extends Controller
             $valor_unitario = $produtos[$i]['price'] / 100;
             $estoque = $produtos[$i]['stocked_quantity'];
 
-            $categorias = $produtos[$i]['categories'][0]['name'].' > '.$produtos[$i]['categories'][0]['description'];
+            $categorias = '***';
+
+            if (isset($produtos[$i]['categories'][0])) {
+                $categorias = $produtos[$i]['categories'][0]['name'].' > '.$produtos[$i]['categories'][0]['description'];
+            }
 
             $xml = 
             '
@@ -113,9 +119,19 @@ class BlingController extends Controller
             
             $retorno = $this->executeInsertProduct($url, $posts);
 
-            dd($retorno);
+            $parsed_xml = simplexml_load_string($retorno);
+            $json = json_encode($parsed_xml);
+            $array = json_decode($json,TRUE);
+
+            if (isset($array['produtos']['produto']['id'])) {
+                $contador++;
+            }
+
+            // dd($array['produtos']['produto']['id']);
 
         }
+
+        echo ("Foram cadastrados $contador produtos.");
 
     }
 
