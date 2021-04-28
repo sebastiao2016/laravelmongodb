@@ -108,7 +108,7 @@ class BlingController extends Controller
                 <imagens>
                     <url>https://bling.com.br/bling.jpg</url>
                 </imagens>
-                <idCategoria>2755229</idCategoria>
+                <idCategoria>2790707</idCategoria>
                 </produto>
             '
             ;

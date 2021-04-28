@@ -34,11 +34,18 @@ return [
             'driver' => 'sync',
         ],
 
+        // 'database' => [
+        //     'driver' => 'database',
+        //     'table' => 'jobs',
+        //     'queue' => 'default',
+        //     'retry_after' => 90,
+        // ],
+
         'database' => [
-            'driver' => 'database',
-            'table' => 'jobs',
-            'queue' => 'default',
-            'retry_after' => 90,
+            'driver' => 'mongodb',
+            'table'  => 'jobs',
+            'queue'  => 'default',
+            'expire' => 60,
         ],
 
         'beanstalkd' => [
@@ -80,10 +87,15 @@ return [
     |
     */
 
+    // 'failed' => [
+    //     'driver' => env('QUEUE_FAILED_DRIVER', 'database-uuids'),
+    //     'database' => env('DB_CONNECTION', 'mysql'),
+    //     'table' => 'failed_jobs',
+    // ],
+
     'failed' => [
-        'driver' => env('QUEUE_FAILED_DRIVER', 'database-uuids'),
-        'database' => env('DB_CONNECTION', 'mysql'),
-        'table' => 'failed_jobs',
+        'database' => 'mongodb',
+        'table'    => 'failed_jobs',
     ],
 
 ];

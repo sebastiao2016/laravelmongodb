@@ -33,3 +33,17 @@ Route::get('calcular_z','App\Http\Controllers\FreteController@calcular_z');
 Route::get('bling-get','App\Http\Controllers\BlingController@index');
 Route::get('bling-post','App\Http\Controllers\BlingController@store');
 Route::get('capturar_loja','App\Http\Controllers\BlingController@capturar_loja');
+
+
+Route::get('envio-email', function(){
+
+    $user = new stdClass();
+    $user->name = 'Sebastiao Web';
+    $user->email = 'sebastiao.cmarques@gmail.com';
+
+    //return new \App\Mail\newLaravelTips($user);
+
+    Mail::queue(new \App\Mail\newLaravelTips($user));
+
+});
+
